@@ -22,7 +22,6 @@ import com.example.demo.paymentorder.exception.InvalidOrderException;
 import com.example.demo.paymentorder.repository.OrderRepository;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({OrderService.class})  
 public class OrderServiceTest {
 	OrderService orderService = new OrderService();
 	
