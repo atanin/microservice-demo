@@ -16,6 +16,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.example.demo.paymentorder.domain.DiscountedOrder;
 import com.example.demo.paymentorder.domain.Order;
 import com.example.demo.paymentorder.domain.OrderItem;
 import com.example.demo.paymentorder.exception.InvalidOrderException;
@@ -51,7 +52,7 @@ public class OrderServiceTest {
 
 		// When
 		try {
-			Order processedOrder = orderService.processOrder(requestOrder);
+			DiscountedOrder processedOrder = orderService.processOrder(requestOrder);
 			
 			//Then
 			assertEquals("test_order_id", processedOrder.getOrderId());
@@ -68,7 +69,7 @@ public class OrderServiceTest {
 		requestOrder.setOrderItems(itemList);
 
 		// When
-		Order processedOrder = orderService.processOrder(requestOrder);
+		DiscountedOrder processedOrder = orderService.processOrder(requestOrder);
 
 	}
 }

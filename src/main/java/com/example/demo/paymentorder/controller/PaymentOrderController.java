@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.paymentorder.domain.DiscountedOrder;
 import com.example.demo.paymentorder.domain.Order;
 import com.example.demo.paymentorder.exception.InvalidOrderException;
 import com.example.demo.paymentorder.service.OrderService;
@@ -20,7 +21,7 @@ public class PaymentOrderController {
 	private OrderService orderService;
 	
 	@PostMapping( value = "/paymentorder",consumes="application/json", produces = "application/json" ) 
-	public @ResponseBody Order generatePaymentOrder(@RequestBody Order order) throws Exception {
+	public @ResponseBody DiscountedOrder generatePaymentOrder(@RequestBody Order order) throws Exception {
 		return orderService.processOrder(order);
 	}
 	

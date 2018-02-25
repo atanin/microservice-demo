@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.paymentorder.domain.DiscountedOrder;
 import com.example.demo.paymentorder.domain.Order;
 import com.example.demo.paymentorder.exception.InvalidOrderException;
 import com.example.demo.paymentorder.repository.OrderRepository;
@@ -18,14 +19,18 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	
-	public Order processOrder(Order order) throws InvalidOrderException {
+	public DiscountedOrder processOrder(Order order) throws InvalidOrderException {
 		isOrderValid(order);
 		
 		com.example.demo.paymentorder.repository.model.Order orderModel = new com.example.demo.paymentorder.repository.model.Order();
+		//EveryOrderGot 30% discount
+		DiscountedOrder discountedOrder = new DiscountedOrder();
+		discountedOrder.setOrderItems(order.getOrderItems());
+		discountedOrder.setDiscount(new BigDecimal(30));
 		orderModel.setOrderPrice(order.getTotalPrice());
 		orderModel = orderRepository.save(orderModel);
-		order.setOrderId(orderModel.getOrderId());
-		return order;
+		discountedOrder.setOrderId(orderModel.getOrderId());
+		return discountedOrder;
 		
 	}
 	
