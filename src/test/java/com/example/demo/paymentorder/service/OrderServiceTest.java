@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.util.reflection.Whitebox;
-import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.example.demo.paymentorder.domain.DiscountedOrder;
@@ -23,6 +23,7 @@ import com.example.demo.paymentorder.exception.InvalidOrderException;
 import com.example.demo.paymentorder.repository.OrderRepository;
 
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore( {"javax.management.*"})
 public class OrderServiceTest {
 	OrderService orderService = new OrderService();
 	
