@@ -155,7 +155,7 @@
 
 
 	<build>
-		<defaultGoal>clean test package</defaultGoal>
+		<defaultGoal>package</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
