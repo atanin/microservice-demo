@@ -3,6 +3,8 @@ package com.example.demo.paymentorder.service;
 
 import java.math.BigDecimal;
 
+import javax.transaction.Transactional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Transactional
 	public DiscountedOrder processOrder(Order order) throws InvalidOrderException {
 		isOrderValid(order);
 		
