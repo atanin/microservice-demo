@@ -170,11 +170,10 @@
 				<version>2.7</version>
 				<configuration>
 					<instrumentation>
-						<ignores>
-							<ignore>.*.repository.*</ignore>
-							<ignore>.*.model.*</ignore>
-							<ignore>*.configuration.*</ignore>
-						</ignores>
+						<excludes>
+							<exclude>com/example/demo/configuration/*</exclude>
+							<exclude>com/example/**/repository/**</exclude>
+						</excludes>
 					</instrumentation>
 				</configuration>
 				<executions>
