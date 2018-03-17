@@ -16,7 +16,7 @@ public class DiscountedOrder extends Order {
 	public BigDecimal getTotalPrice() {
 		BigDecimal price = super.getTotalPrice();
 		BigDecimal discount = price.multiply(this.discount.divide(new BigDecimal(100)));
-		price = price.add(discount.negate());
+		price = price.add(discount.negate()).setScale(2);
 		return price;
 	}
 }

@@ -23,13 +23,13 @@ import com.example.demo.paymentorder.exception.InvalidOrderException;
 import com.example.demo.paymentorder.repository.OrderRepository;
 
 @RunWith(PowerMockRunner.class)
-@PowerMockIgnore( {"javax.management.*"})
+@PowerMockIgnore({ "javax.management.*" })
 public class OrderServiceTest {
 	OrderService orderService = new OrderService();
-	
-	@Mock  
+
+	@Mock
 	private OrderRepository orderRepository;
-	
+
 	@Before
 	public void setup() {
 		Whitebox.setInternalState(orderService, "orderRepository", orderRepository);
@@ -41,7 +41,7 @@ public class OrderServiceTest {
 
 	@Test
 	public void processOrder_success() {
-		// Given	
+		// Given
 		Order requestOrder = new Order();
 		OrderItem orderItem = new OrderItem();
 		orderItem.setItemId(new Long(1));
@@ -52,18 +52,25 @@ public class OrderServiceTest {
 		requestOrder.setOrderItems(itemList);
 
 		// When
-		try {
+		try 
+		{
 			DiscountedOrder processedOrder = orderService.processOrder(requestOrder);
-			
-			//Then
+
+			// Then
 			assertEquals("test_order_id", processedOrder.getOrderId());
+			assertEquals(new BigDecimal(30), processedOrder.getDiscount());
+			assertEquals(new BigDecimal(35.0).setScale(2), processedOrder.getTotalPrice());
+			List<OrderItem> processedOrderItems = processedOrder.getOrderItems();
+			assertEquals(new Long(1), processedOrderItems.get(0).getItemId());
+			assertEquals("Mouse", processedOrderItems.get(0).getItemName());
+			
 		} catch (Exception e) {
 			fail();
 		}
 	}
 
-	@Test(expected = InvalidOrderException.class) 
-	public void processOrder_shouldThrowInvalidOrderException() throws Exception{
+	@Test(expected = InvalidOrderException.class)
+	public void processOrder_shouldThrowInvalidOrderException() throws Exception {
 		// Given
 		Order requestOrder = new Order();
 		List<OrderItem> itemList = new ArrayList();

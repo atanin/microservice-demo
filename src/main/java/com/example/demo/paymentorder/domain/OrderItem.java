@@ -2,10 +2,8 @@ package com.example.demo.paymentorder.domain;
 
 import java.math.BigDecimal;
 
-
 public class OrderItem {
 	private Long itemId;
-	private Long shopId;
 	private String itemName;
 	private BigDecimal price;
 
@@ -31,13 +29,5 @@ public class OrderItem {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
-	}
-
-	public Long getShopId() {
-		return shopId;
-	}
-
-	public void setShopId(Long shopId) {
-		this.shopId = shopId;
 	}
 }

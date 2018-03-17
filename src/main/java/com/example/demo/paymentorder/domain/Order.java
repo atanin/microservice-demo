@@ -8,7 +8,7 @@ public class Order {
 	private List<OrderItem> orderItems;
 
 	public BigDecimal getTotalPrice() {
-		BigDecimal price = new BigDecimal(0);
+		BigDecimal price = new BigDecimal(0).setScale(2);
 		for (OrderItem orderItem : orderItems) {
 			price = price.add(orderItem.getPrice());
 		}
