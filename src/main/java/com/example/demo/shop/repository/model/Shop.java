@@ -1,4 +1,4 @@
-package com.example.demo.paymentorder.repository.model;
+package com.example.demo.shop.repository.model;
 
 import java.math.BigDecimal;
 
@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+@Table(name = "shop")
+public class Shop {
 	
 	@Id
 	@GeneratedValue(generator = "uuid")

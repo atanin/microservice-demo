@@ -14,6 +14,8 @@ import com.example.demo.paymentorder.domain.DiscountedOrder;
 import com.example.demo.paymentorder.domain.Order;
 import com.example.demo.paymentorder.exception.InvalidOrderException;
 import com.example.demo.paymentorder.repository.OrderRepository;
+import com.example.demo.shop.domain.Ticket;
+import com.example.demo.shop.service.ShopService;
 
 @Service
 public class OrderService {
@@ -21,6 +23,10 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Autowired
+	private ShopService shopService;
+	
+
 	@Transactional
 	public DiscountedOrder processOrder(Order order) throws InvalidOrderException {
 		isOrderValid(order);
@@ -29,10 +35,15 @@ public class OrderService {
 		//EveryOrderGot 30% discount
 		DiscountedOrder discountedOrder = new DiscountedOrder();
 		discountedOrder.setOrderItems(order.getOrderItems());
-		discountedOrder.setDiscount(new BigDecimal(30));
+//		discountedOrder.setDiscount(new BigDecimal(30));
+		Ticket ticket = shopService.getDiscount();
+		discountedOrder.setDiscount(ticket.getDiscount());
+		
 		orderModel.setOrderPrice(order.getTotalPrice());
+		orderModel.setDiscount(ticket.getDiscount());
 		orderModel = orderRepository.save(orderModel);
 		discountedOrder.setOrderId(orderModel.getOrderId());
+		
 		return discountedOrder;
 		
 	}
