@@ -16,9 +16,19 @@ public class Order {
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid")
-	public  String orderId;
+	public String orderId;
 
 	public BigDecimal orderPrice;
+	
+	public BigDecimal discount; 
+	
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
 
 	public String getOrderId() {
 		return orderId;
