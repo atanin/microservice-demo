@@ -1,4 +1,6 @@
 /target/*
 .factorypath
 /.settings/*
-
+/bin/*
+*.class
+.classpath
